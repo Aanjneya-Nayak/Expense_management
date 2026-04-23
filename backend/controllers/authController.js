@@ -5,10 +5,10 @@ const jwt = require("jsonwebtoken");
 // Register User
 exports.register = async (req, res) => {
   try {
-    const { name, email, password, confirmPassword } = req.body;
+    const { name, email, password, confirmPassword, contactInfo } = req.body;
 
     // Validate input
-    if (!name || !email || !password || !confirmPassword) {
+    if (!name || !email || !password || !confirmPassword || !contactInfo) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
@@ -30,6 +30,7 @@ exports.register = async (req, res) => {
       name,
       email,
       password: hashedPassword,
+      contactInfo,
     });
 
     await user.save();
@@ -40,6 +41,7 @@ exports.register = async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
+        contactInfo: user.contactInfo,
       },
     });
   } catch (error) {
@@ -87,6 +89,7 @@ exports.login = async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
+        contactInfo: user.contactInfo,
       },
     });
   } catch (error) {

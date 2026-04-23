@@ -24,6 +24,12 @@ const userSchema = new mongoose.Schema(
       minlength: 6,
       select: false,
     },
+    contactInfo: {
+      type: String,
+      required: [true, "Please provide contact information"],
+      trim: true,
+      maxlength: [20, "Contact info cannot exceed 20 characters"],
+    },
   },
   { timestamps: true },
 );
